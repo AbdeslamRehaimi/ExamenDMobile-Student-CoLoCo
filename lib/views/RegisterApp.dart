@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/helpers/splash_animation.dart';
+import 'package:studen_co_loco/views/LoginApp.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -49,17 +51,34 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(
             height: 45,
             width: MediaQuery.of(context).size.width / 1.2,
+            
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Color(0xFFf45d27), Color(0xFFf5851f)],
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(50))),
-            child: Center(
+            child: Center( 
+              
+              child: MaterialButton( 
+                color: Colors.deepOrange,
+                child: Text(
+                  'Register'.toUpperCase(),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  
+                ),
+                onPressed:(){
+                  Navigator.push(
+                  context, SplashAnimation(widget: LoginPage())
+                );
+              },
+              ) 
+              /*
               child: Text(
                 'Register'.toUpperCase(),
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
+              */
             ),
           ),
         ],
