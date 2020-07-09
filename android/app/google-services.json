@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1052144036839",
+    "firebase_url": "https://coloco-8454a.firebaseio.com",
+    "project_id": "coloco-8454a",
+    "storage_bucket": "coloco-8454a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052144036839:android:fbc21cca44dbf1492ceb42",
+        "android_client_info": {
+          "package_name": "com.company.studen_co_loco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052144036839-blik4e7j2ivlq9hckv8l189kolaqdrfd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwbcUBcBARLDm2yWncyjiwx8CsBKVl70Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052144036839-blik4e7j2ivlq9hckv8l189kolaqdrfd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

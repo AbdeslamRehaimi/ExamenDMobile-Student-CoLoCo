@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons:
   firebase_auth:
   firebase_database:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
