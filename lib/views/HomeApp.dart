@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
 import 'package:studen_co_loco/views/Offres/OffresPage.dart';
 import 'package:studen_co_loco/widgets/custom_button.dart';
@@ -6,6 +7,12 @@ import 'package:studen_co_loco/views/auth/LoginApp.dart';
 import 'package:studen_co_loco/views/auth/RegisterApp.dart';
 
 class HomePage extends StatefulWidget {
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
+  
+  HomePage({Key key, this.auth, this.userId, this.logoutCallback}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }

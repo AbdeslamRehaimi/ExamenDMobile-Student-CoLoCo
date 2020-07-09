@@ -1,16 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
+import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/HomeApp.dart';
 import 'package:studen_co_loco/views/auth/PasswordApp.dart';
 import 'package:studen_co_loco/views/auth/RegisterApp.dart';
 
 class LoginPage extends StatefulWidget {
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
+  LoginPage({this.auth, this.loginCallback});
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //formKey used for form validation
+  final _formKey = new GlobalKey<FormState>();
+  String _email;
+  String _password;
+  String _errorMessage;
+  bool _isLoginForm;
+  bool _isLoading;
+
+  // Check if form is valid before perform login or signup
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  // Perform login or signup
+  void validateAndSubmit() async {
+    setState(() {
+      _errorMessage = "";
+      _isLoading = true;
+    });
+    if (validateAndSave()) {
+      String userId = "";
+      try {
+        if (_isLoginForm) {
+          userId = await widget.auth.signIn(_email, _password);
+          print('Signed in: $userId');
+        } else {
+          userId = await widget.auth.signUp(_email, _password);
+          //widget.auth.sendEmailVerification();
+          //_showVerifyEmailSentDialog();
+          print('Signed up user: $userId');
+        }
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (userId.length > 0 && userId != null && _isLoginForm) {
+          widget.loginCallback();
+        }
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          _isLoading = false;
+          _errorMessage = e.message;
+          _formKey.currentState.reset();
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    _errorMessage = "";
+    _isLoading = false;
+    _isLoginForm = true;
+    super.initState();
+  }
+
+  void resetForm() {
+    _formKey.currentState.reset();
+    _errorMessage = "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,31 +179,29 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   new GestureDetector(
-                    
                     onTap: () {
                       Navigator.push(
-                            context, SplashAnimation(widget: ResetPage()));
+                          context, SplashAnimation(widget: ResetPage()));
                     },
-                      child: Padding( 
+                    child: Padding(
                       padding: const EdgeInsets.only(top: 16, left: 230),
-                      child: new Text('Forgot Password ?',style: TextStyle(color: Colors.grey)),
-                      ),                    
+                      child: new Text('Forgot Password ?',
+                          style: TextStyle(color: Colors.grey)),
+                    ),
                   ),
                   new GestureDetector(
-                    
                     onTap: () {
                       Navigator.push(
-                            context, SplashAnimation(widget: RegisterPage()));
+                          context, SplashAnimation(widget: RegisterPage()));
                     },
-                      child: Padding( 
+                    child: Padding(
                       padding: const EdgeInsets.only(top: 16, left: 230),
-                      child: new Text('Register ?',style: TextStyle(color: Colors.grey)),
-                      ),                    
+                      child: new Text('Register ?',
+                          style: TextStyle(color: Colors.grey)),
+                    ),
                   ),
-                  
                   Spacer(),
                   Container(
-           
                     child: Center(
                         child: MaterialButton(
                       padding: EdgeInsets.fromLTRB(140.0, 0.0, 140.0, 0.0),
@@ -152,9 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                             context, SplashAnimation(widget: HomePage()));
                       },
                     )),
-                    
                   ),
-                  
                 ],
               ),
             )

@@ -7,6 +7,7 @@ class Offer{
   String nbreEtudianMax;
   String description;
   String photo;
+  String userId;
 
   Map<String, dynamic> toJson()=>{
     'titre' : this.titre,
@@ -17,5 +18,6 @@ class Offer{
     'nbreEtudianMax': this.nbreEtudianMax,
     'description': this.description,
     'photo': this.photo,
+    'userId' : this.userId,
   };
 }
