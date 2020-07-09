@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studen_co_loco/widgets/custom_date_time_picker.dart';
 import 'package:studen_co_loco/widgets/custom_modal_action_button.dart';
 import 'package:studen_co_loco/widgets/custom_textfield.dart';
+import 'package:studen_co_loco/widgets/custum_numberfield.dart';
 //import 'package:studen_co_loco/model/todo.dart';
 
 class AddOfferPage extends StatefulWidget {
@@ -10,15 +10,13 @@ class AddOfferPage extends StatefulWidget {
 }
 
 class _AddOfferPageState extends State<AddOfferPage> {
-  //String _selectedDate = 'Pick date';
-  DateTime _selectedDate = DateTime.now();
-  //String _selectedTime = 'Pick time';
-  TimeOfDay _selectedTime = TimeOfDay.now(); 
-
-
-  final _textEventControler = TextEditingController();
-  final _textDescControler = TextEditingController();
-
+   
+  final _inputPhoneControler = TextEditingController();
+  final _inputAdrControler = TextEditingController();
+  final _inputSuperfControler = TextEditingController();
+  final _inputCapControler = TextEditingController();
+  final _inputDescControler = TextEditingController();
+  final _inputPriceControler = TextEditingController();
 
 
 
@@ -38,21 +36,24 @@ class _AddOfferPageState extends State<AddOfferPage> {
           SizedBox(
             height: 24,
           ),
+          CustomNumberField(
+              labelText: 'Numero Telephone', controller: _inputPhoneControler,),
+          SizedBox(height: 5),
           CustomTextField(
-              labelText: 'Numero Telephone', controller: _textEventControler),
-          SizedBox(height: 12),
+              labelText: 'L’adresse du logement', controller: _inputAdrControler),
+          SizedBox(height: 5),
+          CustomNumberField(
+              labelText: 'Superficie', controller: _inputSuperfControler),
+          SizedBox(height: 5),
+          CustomNumberField(
+              labelText: 'Capacité', controller: _inputCapControler),
+          SizedBox(height: 5),
+          CustomNumberField(
+              labelText: 'Prix/mois', controller: _inputPriceControler),
+          SizedBox(height: 5),
           CustomTextField(
-              labelText: 'L’adresse du logement', controller: _textEventControler),
-          SizedBox(height: 12),
-          CustomTextField(
-              labelText: 'Superficie', controller: _textEventControler),
-          SizedBox(height: 12),
-          CustomTextField(
-              labelText: 'Capacité', controller: _textEventControler),
-          SizedBox(height: 12),
-          CustomTextField(
-              labelText: 'Description', controller: _textDescControler),
-          SizedBox(height: 12),
+              labelText: 'Description', controller: _inputDescControler),
+          SizedBox(height: 5),
           
           
           CustomModalActionButton(
@@ -60,8 +61,8 @@ class _AddOfferPageState extends State<AddOfferPage> {
               Navigator.of(context).pop();
             },
             onSave: () {
-              if (_textEventControler.text == "" ||
-                  _textDescControler.text == "") {
+              if (_inputPhoneControler.text == "" ||
+                  _inputAdrControler.text == "" ) {
                 print("data not found");
               } else {
                 /*

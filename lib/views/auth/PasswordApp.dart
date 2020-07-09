@@ -86,8 +86,29 @@ class _ResetPageState extends State<ResetPage> {
                   ),
                
           
+                  new GestureDetector(
+                    
+                    onTap: () {
+                      Navigator.push(
+                            context, SplashAnimation(widget: ResetPage()));
+                    },
+                      child: Padding( 
+                      padding: const EdgeInsets.only(top: 16, left: 230),
+                      child: new Text('Have an account?',style: TextStyle(color: Colors.grey)),
+                      ),                    
+                  ),
+                  new GestureDetector(
+                    
+                    onTap: () {
+                      Navigator.push(
+                            context, SplashAnimation(widget: RegisterPage()));
+                    },
+                      child: Padding( 
+                      padding: const EdgeInsets.only(top: 16, left: 230),
+                      child: new Text('Register ?',style: TextStyle(color: Colors.grey)),
+                      ),                    
+                  ),
                   Spacer(),
-                  
                   Container(
                     child: Center(
                       

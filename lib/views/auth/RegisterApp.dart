@@ -20,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //Headers
             //showCircularProgress(),
             showHeader(),
+
             showForm(),
           ],
         ),
@@ -46,16 +47,26 @@ class _RegisterPageState extends State<RegisterPage> {
         children: <Widget>[
           showEmailInput(),
           showPasswordInput(),
-          Spacer(),
           showFullNameInput(),
-          
+          Spacer(),
+          new GestureDetector(
+            onTap: () {
+              Navigator.push(context, SplashAnimation(widget: LoginPage()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16, left: 230),
+              child: new Text('Login ?', style: TextStyle(color: Colors.grey)),
+            ),
+          ),
+          Spacer(),
           Spacer(),
           Container(
             child: Center(
               child: MaterialButton(
                 padding: EdgeInsets.fromLTRB(140.0, 0.0, 140.0, 0.0),
                 height: 45,
-                shape: new RoundedRectangleBorder( borderRadius: new BorderRadius.circular(30.0)),
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
                 color: Colors.deepOrange,
                 child: Text(
                   'Register'.toUpperCase(),
@@ -63,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  Navigator.push(context, SplashAnimation(widget: ResetPage()));
+                  Navigator.push(context, SplashAnimation(widget: LoginPage()));
                 },
               ),
             ),
@@ -147,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       width: MediaQuery.of(context).size.width / 1.2,
       height: 45,
-      margin: EdgeInsets.only(top: 32),
+      margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(50)),

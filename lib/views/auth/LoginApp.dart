@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
+import 'package:studen_co_loco/views/HomeApp.dart';
+import 'package:studen_co_loco/views/auth/PasswordApp.dart';
 import 'package:studen_co_loco/views/auth/RegisterApp.dart';
 
 class LoginPage extends StatefulWidget {
@@ -105,55 +107,54 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16, right: 32),
-                      child: Text(
-                        'Forgot Password ?',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
+                  new GestureDetector(
+                    
+                    onTap: () {
+                      Navigator.push(
+                            context, SplashAnimation(widget: ResetPage()));
+                    },
+                      child: Padding( 
+                      padding: const EdgeInsets.only(top: 16, left: 230),
+                      child: new Text('Forgot Password ?',style: TextStyle(color: Colors.grey)),
+                      ),                    
                   ),
+                  new GestureDetector(
+                    
+                    onTap: () {
+                      Navigator.push(
+                            context, SplashAnimation(widget: RegisterPage()));
+                    },
+                      child: Padding( 
+                      padding: const EdgeInsets.only(top: 16, left: 230),
+                      child: new Text('Register ?',style: TextStyle(color: Colors.grey)),
+                      ),                    
+                  ),
+                  
                   Spacer(),
                   Container(
-                    /*
-                    height: 45,
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFf45d27), Color(0xFFf5851f)],
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
-                        */
+           
                     child: Center(
-                      
-                      child: MaterialButton(
+                        child: MaterialButton(
                       padding: EdgeInsets.fromLTRB(140.0, 0.0, 140.0, 0.0),
                       height: 45,
-                      shape: new RoundedRectangleBorder( borderRadius: new BorderRadius.circular(30.0)),
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
                       color: Colors.deepOrange,
                       child: Text(
                         'Login'.toUpperCase(),
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold, ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       onPressed: () {
                         Navigator.push(
-                            context, SplashAnimation(widget: RegisterPage()));
+                            context, SplashAnimation(widget: HomePage()));
                       },
                     )),
-                    /*
-                    child: Center(
-                      child: Text('Login'.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                    */
+                    
                   ),
+                  
                 ],
               ),
             )
