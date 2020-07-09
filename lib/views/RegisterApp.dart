@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
 import 'package:studen_co_loco/views/LoginApp.dart';
+import 'package:studen_co_loco/views/PasswordApp.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -15,13 +16,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: Container(
         child: Column(
-        children: <Widget>[
-          
-          //Headers
-          //showCircularProgress(),
-          showHeader(),
-          showForm(),
-        ],
+          children: <Widget>[
+            //Headers
+            //showCircularProgress(),
+            showHeader(),
+            showForm(),
+          ],
         ),
       ),
     );
@@ -49,36 +49,21 @@ class _RegisterPageState extends State<RegisterPage> {
           showPasswordInput(),
           Spacer(),
           Container(
-            height: 45,
-            width: MediaQuery.of(context).size.width / 1.2,
-            
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFf45d27), Color(0xFFf5851f)],
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(50))),
-            child: Center( 
-              
-              child: MaterialButton( 
+            child: Center(
+              child: MaterialButton(
+                padding: EdgeInsets.fromLTRB(140.0, 0.0, 140.0, 0.0),
+                height: 45,
+                shape: new RoundedRectangleBorder( borderRadius: new BorderRadius.circular(30.0)),
                 color: Colors.deepOrange,
                 child: Text(
                   'Register'.toUpperCase(),
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                onPressed:(){
-                  Navigator.push(
-                  context, SplashAnimation(widget: LoginPage())
-                );
-              },
-              ) 
-              /*
-              child: Text(
-                'Register'.toUpperCase(),
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                onPressed: () {
+                  Navigator.push(context, SplashAnimation(widget: ResetPage()));
+                },
               ),
-              */
             ),
           ),
         ],
@@ -103,12 +88,13 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Spacer(),
+          Spacer(),
+          Spacer(),
           Align(
             alignment: Alignment.center,
-            child: Icon(
-              Icons.person,
-              size: 90,
-              color: Colors.white,
+            child: Image.asset(
+              'assets/images/main_logo.png',
+              width: MediaQuery.of(context).size.width * 1,
             ),
           ),
           Spacer(),
@@ -210,6 +196,4 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
-
 }

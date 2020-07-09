@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/views/HomeApp.dart';
 import 'package:studen_co_loco/views/LoginApp.dart';
+import 'package:studen_co_loco/views/SplachApp.dart';
 import 'views/RegisterApp.dart';
-import 'views/WelcomApp.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue, 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: RegisterPage(),
+      home: SplashScreen(),
+      routes: {
+        'login': (context) =>LoginPage()
+      },
     );
   }
 }
