@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
 import 'package:studen_co_loco/views/Offres/OffresPage.dart';
 import 'package:studen_co_loco/widgets/custom_button.dart';
 import 'package:studen_co_loco/views/auth/LoginApp.dart';
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                     //if else
                     child:
                         //currentPage == 0 ?  AddTaskPage() : currentPage == 1 ? AddEventPage() : AddMemoPage(),
-                        currentPage == 0 ? LoginPage() : RegisterPage(),
+                        currentPage == 0 ? AddOfferPage() : AddOfferPage(),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12))));
               });
