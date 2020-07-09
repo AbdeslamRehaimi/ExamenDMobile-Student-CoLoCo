@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
-import 'package:studen_co_loco/views/LoginApp.dart';
-import 'package:studen_co_loco/views/PasswordApp.dart';
+import 'package:studen_co_loco/views/auth/LoginApp.dart';
+import 'package:studen_co_loco/views/auth/PasswordApp.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -44,9 +44,11 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: EdgeInsets.only(top: 62),
       child: Column(
         children: <Widget>[
-          showFullNameInput(),
           showEmailInput(),
           showPasswordInput(),
+          Spacer(),
+          showFullNameInput(),
+          
           Spacer(),
           Container(
             child: Center(
@@ -129,13 +131,13 @@ class _RegisterPageState extends State<RegisterPage> {
         decoration: InputDecoration(
           border: InputBorder.none,
           icon: Icon(
-            Icons.person,
+            Icons.security,
             color: Colors.grey,
           ),
-          hintText: 'Full Name',
+          hintText: 'Confirme Password',
         ),
         validator: (value) =>
-            value.isEmpty ? 'Full Name can\'t be empty' : null,
+            value.isEmpty ? 'Password confirmation can\'t be empty' : null,
         //onSaved: (value) => _email = value.trim(),
       ),
     );

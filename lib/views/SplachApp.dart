@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
-import 'package:studen_co_loco/views/LoginApp.dart';
+import 'package:studen_co_loco/views/auth/LoginApp.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
