@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/models/Offers.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/HomeApp.dart';
+import 'package:studen_co_loco/views/Offres/AddOffers/FirstAddOffersLoc.dart';
+import 'package:studen_co_loco/views/Offres/AddOffers/TirthAddOfferImage.dart';
 import 'package:studen_co_loco/views/RootMaping.dart';
 import 'package:studen_co_loco/views/SplachApp.dart';
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
+import 'package:studen_co_loco/models/Offers.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
+import 'package:studen_co_loco/views/Offres/AddOffers/FirstAddOffersLoc.dart';
 import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
 import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
 import 'package:studen_co_loco/views/tests/OfferGoogleFirebase.dart';
@@ -26,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   PageController _pageController = PageController();
   // btn +
   double currentPage = 0;
+  //Offer(this.titre, this.adress, this.superficie, this.prix, this.capacite, this.description, this.photo, this.tel);
+  final newOffer = new Offer('Titre Example', null, null,null, null, null,null, null);
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +73,7 @@ class _HomePageState extends State<HomePage> {
       //Button plus action .. add events/tasks
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          /*
           showDialog(
               barrierDismissible: false,
               context: context,
@@ -81,7 +86,12 @@ class _HomePageState extends State<HomePage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12)))
                         );
-              });
+          });
+          */
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OfferLocationPage(offer: newOffer))
+          );  
         },
         child: Icon(Icons.add),
       ),
