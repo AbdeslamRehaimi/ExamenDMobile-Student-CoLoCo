@@ -35,6 +35,7 @@ dependencies:
   geocoder:
   geolocator:
   google_maps_flutter:
+  cloud_firestore:
   #cloud_firestore:
   
 
