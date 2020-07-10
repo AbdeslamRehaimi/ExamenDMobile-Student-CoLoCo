@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
+import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
 import 'package:studen_co_loco/views/tests/OfferGoogleFirebase.dart';
 import 'package:studen_co_loco/views/tests/OffersGoogleMap.dart';
 import 'package:studen_co_loco/views/Offres/OffresPage.dart';
@@ -75,10 +76,10 @@ class _HomePageState extends State<HomePage> {
                     //which Dialog to add event or task or memo to show to show
                     //if else
                     child:
-                        //currentPage == 0 ?  AddTaskPage() : currentPage == 1 ? AddEventPage() : AddMemoPage(),
-                        currentPage == 0 ? AddOfferPage() : AddOfferPage(),
+                        currentPage == 0 ? AddOfferPage() : DetailsShow(),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12))));
+                        borderRadius: BorderRadius.all(Radius.circular(12)))
+                        );
               });
         },
         child: Icon(Icons.add),

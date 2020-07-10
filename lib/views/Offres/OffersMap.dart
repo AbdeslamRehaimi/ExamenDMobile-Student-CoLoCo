@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoder/geocoder.dart';
 import "package:latlong/latlong.dart" as LatLng;
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
 
 class OffersMapPage extends StatefulWidget {
   @override
@@ -14,16 +14,14 @@ class _OffersMapPageState extends State<OffersMapPage> {
   List<Marker> allMarkers = [];
   var clients = [];
 
-
-void initState() {
+  void initState() {
     super.initState();
     populateMarkers();
   }
 
-
   setMarkers() {
-    for(int i=0; i<clients.length; i++){
-        addToList(clients[i]);
+    for (int i = 0; i < clients.length; i++) {
+      addToList(clients[i]);
     }
     /*
     allMarkers.add(
@@ -56,7 +54,6 @@ void initState() {
         }
       }
     });
-    
   }
 
   addToList(variable) async {
@@ -66,16 +63,30 @@ void initState() {
     var first = adresses.first;
 
     setState(() {
-      allMarkers.add(
-        new Marker(
+      allMarkers.add(new Marker(
           width: 45.0,
-          height: 45.0, 
-          point: new LatLng.LatLng(first.coordinates.latitude, first.coordinates.longitude),
+          height: 45.0,
+          point: new LatLng.LatLng(
+              first.coordinates.latitude, first.coordinates.longitude),
           builder: (context) => new Container(
-            child: IconButton(icon: Icon(Icons.location_on),  iconSize: 45.0 ,onPressed: (){print(variable['adress']);}),
-          )
-        )
-      );
+                child: IconButton(
+                    icon: Icon(Icons.location_on),
+                    iconSize: 45.0,
+                    onPressed: () {
+                      print(variable['adress']);
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                                child: DetailsShow(),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(12))));
+                          });
+                      //print('Typed a title offer');
+                    }),
+              )));
     });
   }
 
@@ -85,7 +96,7 @@ void initState() {
       /*appBar: new AppBar(title: new Text('Leaflet Maps'),
       leading: new IconButton(icon: Icon(Icons.ac_unit), onPressed: () {addToList();}),
       ),*/
-      
+
       body: new FlutterMap(
           options: new MapOptions(
               center: new LatLng.LatLng(40.71, -74.00), minZoom: 10.0),
@@ -95,8 +106,8 @@ void initState() {
                     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 subdomains: ['a', 'b', 'c']),
             new MarkerLayerOptions(
-              
-              /*
+
+                /*
             new Marker(
               width: 45.0,
               height: 45.0,
@@ -113,8 +124,7 @@ void initState() {
               )
             )
             */
-            markers: setMarkers()
-            )
+                markers: setMarkers())
           ]),
     );
   }

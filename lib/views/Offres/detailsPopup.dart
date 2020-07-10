@@ -1,39 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:studen_co_loco/views/Offres/OffreDetails.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
+import 'package:flutter/material.dart';
+import 'package:studen_co_loco/widgets/custom_modal_action_button.dart';
 
-class OffrePage extends StatefulWidget {
+class DetailsShow extends StatefulWidget {
   @override
-  _OffrePageState createState() => _OffrePageState();
+  _DetailsShowState createState() => _DetailsShowState();
 }
 
-class _OffrePageState extends State<OffrePage> {
+class _DetailsShowState extends State<DetailsShow> {
   var clients = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 45),
+        padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+        
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          //padding: EdgeInsets.only(top: 8),
           children: <Widget>[
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.only(top: 8),
-                children: [
-                  buildPostSection(
-                      'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640',
-                      "assets/images/main_logo.png"),
-                  buildPostSection(
-                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
-                      "assets/images/profile.png"),
-                  buildPostSection(
-                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
-                      "assets/images/profile.png"),
-                ],
-              ),
-            )
+            
+            buildPostSection(
+                'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640',
+                "assets/images/main_logo.png"),
+            
           ],
         ),
       ),
@@ -86,8 +77,26 @@ class _OffrePageState extends State<OffrePage> {
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800]),
           ),
+
+          SizedBox(
+            height: 8,
+          ),
+          Divider(
+                color: Colors.grey,
+                height: 8,
+                thickness: 2,
+              ),
+          CustomModalActionButton(
+            onClose: () {
+              Navigator.of(context).pop();
+            },
+            onSave: () {
+              Navigator.of(context).pop();
+            },
+          )
         ],
       ),
+      
     );
   }
 
@@ -98,21 +107,7 @@ class _OffrePageState extends State<OffrePage> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ///Gestion click sur image
             GestureDetector(
-              onTap: () {
-                showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                          child: DetailsShow(),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))));
-                    });
-                //print('Typed a title offer');
-              },
               child: Hero(
                 tag: urlProfilePhoto,
                 child: CircleAvatar(
@@ -128,29 +123,15 @@ class _OffrePageState extends State<OffrePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  child: Text(
-                    "Co-Loc : House with two rooms",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                
+                Text(
+                  "Co-Loc : House with two rooms",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
-                  onTap: () {
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                              child: DetailsShow(),
-                              shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                          ));
-                        });
-                    //print('Typed a title offer');
-                  },
                 ),
+               
                 Text(
                   "0625896525",
                   style: TextStyle(
@@ -186,10 +167,13 @@ class _OffrePageState extends State<OffrePage> {
                   offset: Offset(0, 10),
                 ),
               ],
+              
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(urlPost),
-              )),
+                
+                image: NetworkImage(urlPost)
+              )
+            ),
         ),
         //THIS IS WHERE TO PUPULATE PRICE AND INFOS OF OFFER
         _displayContent(clients),
@@ -200,7 +184,7 @@ class _OffrePageState extends State<OffrePage> {
   Widget _displayContent(data) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(left: 50, top: 200.0, bottom: 20.0),
+        padding: const EdgeInsets.only(left: 50, top: 200.0, bottom: 20.0, right: 50),
         child: Container(
           padding: const EdgeInsets.all(14.0),
           width: 250,

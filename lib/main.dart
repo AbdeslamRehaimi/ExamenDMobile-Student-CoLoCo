@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/HomeApp.dart';
+import 'package:studen_co_loco/views/RootMaping.dart';
 import 'package:studen_co_loco/views/SplachApp.dart';
 
 
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue, 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      //home: HomePage(),
+      home: new RootPage(auth: new Auth()),
     );
   }
 }
