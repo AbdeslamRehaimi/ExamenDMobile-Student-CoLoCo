@@ -4,7 +4,6 @@ class Offer{
   String superficie;
   String prix;
   String capacite;
-  String nbreEtudianMax;
   String description;
   String photo;
   String userIdOffer;
@@ -18,7 +17,6 @@ class Offer{
     'superficie': this.superficie,
     'prix': this.prix,
     'capacite': this.capacite,
-    'nbreEtudianMax': this.nbreEtudianMax,
     'description': this.description,
     'photo': this.photo,
     'userIdOffer' : this.userIdOffer,

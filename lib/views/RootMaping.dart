@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/views/SplachApp.dart';
 import 'package:studen_co_loco/views/auth/LoginApp.dart';
 import 'package:studen_co_loco/views/auth/RegisterApp.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
@@ -68,7 +69,8 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     switch (authStatus) {
       case AuthStatus.NOT_DETERMINED:
-        return buildWaitingScreen();
+        //return buildWaitingScreen();
+        return SplashScreen();
         break;
       case AuthStatus.NOT_LOGGED_IN:
         return new LoginPage(
@@ -84,7 +86,8 @@ class _RootPageState extends State<RootPage> {
             logoutCallback: logoutCallback,
           );
         } else
-          return buildWaitingScreen();
+          //return buildWaitingScreen();
+          return SplashScreen();
         break;
       default:
         return buildWaitingScreen();

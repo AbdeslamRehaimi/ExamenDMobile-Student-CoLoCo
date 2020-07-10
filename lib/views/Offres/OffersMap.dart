@@ -46,7 +46,7 @@ class _OffersMapPageState extends State<OffersMapPage> {
 
   populateMarkers() {
     clients = [];
-    Firestore.instance.collection('markers').getDocuments().then((value) {
+    Firestore.instance.collection('Offers').getDocuments().then((value) {
       if (value.documents.isNotEmpty) {
         for (int i = 0; i < value.documents.length; i++) {
           clients.add(value.documents[i].data);
@@ -99,7 +99,8 @@ class _OffersMapPageState extends State<OffersMapPage> {
 
       body: new FlutterMap(
           options: new MapOptions(
-              center: new LatLng.LatLng(40.71, -74.00), minZoom: 10.0),
+            //POSITIONED INIT ON BENI MELLAL
+            center: new LatLng.LatLng(32.33725, -6.34983), minZoom: 10.0),
           layers: [
             new TileLayerOptions(
                 urlTemplate:
