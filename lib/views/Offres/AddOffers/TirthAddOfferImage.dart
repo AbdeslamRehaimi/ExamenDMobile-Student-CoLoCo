@@ -8,20 +8,13 @@ import 'package:studen_co_loco/widgets/custum_numberfield.dart';
 
 
 
-class OfferImagePage extends StatefulWidget {
+class OfferImagePage extends StatelessWidget {
   final Offer offer;
-  
   OfferImagePage({Key key, @required this.offer}) : super(key: key);
 
-  @override
-  _OfferImagePageState createState() => _OfferImagePageState();
-}
-
-class _OfferImagePageState extends State<OfferImagePage> {
 
   TextEditingController _photo = new TextEditingController();
   TextEditingController _phone = new TextEditingController();
-  Offer offer;
   final db = Firestore.instance;
 
   @override
@@ -33,33 +26,34 @@ class _OfferImagePageState extends State<OfferImagePage> {
         mainAxisAlignment: MainAxisAlignment.center ,
         children: <Widget>[
            Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15.0),
             child: CustomTextField(
                 labelText: 'Phone du logement', controller: _phone),
           ),
           
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15.0),
             child: CustomTextField(
                 labelText: 'Photo du logement', controller: _photo),
           ),
           
-          Spacer(),
-          RaisedButton(
-            color: Theme.of(context).accentColor,
-            textColor: Colors.white,
-            child: Text("Enregistrer"),
+          MaterialButton(
+            child: Text("Enregistrer".toUpperCase(), style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            height: 45,
+            shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.deepOrange,
+            padding: EdgeInsets.fromLTRB(140.0, 0.0, 140.0, 0.0),
+        
             onPressed: () async {
-              //offer.photo = _photo.text; 
-              //offer.tel =  _phone.text;
-              Offer newOffer = new Offer('Titre Example', 'Titre Example', 'Titre Example','Titre Example', 'Titre Example', 'Titre Example','Titre Example', 'Titre Example');
+              offer.photo = _photo.text; 
+              offer.tel =  _phone.text;
+              //Offer newOffer = new Offer('Titre Example', 'Titre Example', 'Titre Example','Titre Example', 'Titre Example', 'Titre Example','Titre Example', 'Titre Example');
               print('object');
-
-              Firestore.instance.collection("Offers").add({
-                 "name": "john",
-                  "age": 50,
-                  "email": "example@example.com",
-              }).then((value) {
+              
+              Firestore.instance.collection("Offers").add(
+                 offer.toJson()
+              ).then((value) {
                 print(value.documentID);
                 Firestore.instance
                     .collection("offers")

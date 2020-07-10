@@ -6,20 +6,15 @@ import 'package:studen_co_loco/widgets/custom_textfield.dart';
 import 'package:studen_co_loco/widgets/custum_numberfield.dart';
 
 
-class OfferDetailsPage extends StatefulWidget {
+class OfferDetailsPage extends StatelessWidget {
   final Offer offer;
   OfferDetailsPage({Key key, @required this.offer}) : super(key: key);
 
-  @override
-  _OfferDetailsPageState createState() => _OfferDetailsPageState();
-}
 
-class _OfferDetailsPageState extends State<OfferDetailsPage> {
+  final _superficie = TextEditingController();
+  final _capacite = TextEditingController();
+  final _prix = TextEditingController();
 
-  TextEditingController _superficie = new TextEditingController();
-  TextEditingController _capacite = new TextEditingController();
-  TextEditingController _prix = new TextEditingController();
-  Offer offer;
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +25,31 @@ class _OfferDetailsPageState extends State<OfferDetailsPage> {
         mainAxisAlignment: MainAxisAlignment.center ,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15.0),
             child: CustomTextField(
                 labelText: 'Superficie du logement', controller: _superficie),
             ),
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15.0),
             child: CustomTextField(
                 labelText: 'Capacite du logement', controller: _capacite),
             ),
           
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15.0),
             child: CustomTextField(
                 labelText: 'Prix du logement', controller: _prix),
           ),
-          Spacer(),
-          RaisedButton(
-            child: Text("Continue"),
-            color: Theme.of(context).accentColor,
+
+
+          MaterialButton(
+            child: Text("Continue", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            height: 45,
+            shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.deepOrange,
+            padding: EdgeInsets.fromLTRB(140.0, 0.0, 140.0, 0.0),
+        
             textColor: Colors.white,
             onPressed: () {
               offer.superficie = _superficie.text;

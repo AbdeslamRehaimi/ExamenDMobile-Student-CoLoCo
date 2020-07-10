@@ -90,8 +90,9 @@ class _HomePageState extends State<HomePage> {
           */
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => OfferLocationPage(offer: newOffer))
-          );  
+            MaterialPageRoute(builder: (context) => OfferLocationPage(offer: newOffer) )
+          );
+          
         },
         child: Icon(Icons.add),
       ),
