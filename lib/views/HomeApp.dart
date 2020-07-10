@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 30),
+        SizedBox(height: 25),
         Padding(
           padding: const EdgeInsets.all(24.0),
           child: Text(

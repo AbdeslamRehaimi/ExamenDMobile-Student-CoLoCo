@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1052144036839:android:fbc21cca44dbf1492ceb42",
+        "mobilesdk_app_id": "1:1052144036839:android:155aa35a58a039e62ceb42",
         "android_client_info": {
-          "package_name": "com.company.studen_co_loco"
+          "package_name": "com.example.studen_co_loco"
         }
       },
       "oauth_client": [

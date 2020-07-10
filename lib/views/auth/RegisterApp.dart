@@ -9,20 +9,29 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = new GlobalKey<FormState>();
+  String _email;
+  String _password;
+  String _confPassword;
+
   bool _isLoading;
   String _errorMessage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Column(
-          children: <Widget>[
-            //Headers
-            //showCircularProgress(),
-            showHeader(),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              //Headers
+              //showCircularProgress(),
+              showHeader(),
 
-            showForm(),
-          ],
+              showForm(),
+            ],
+          ),
         ),
       ),
     );
@@ -47,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
         children: <Widget>[
           showEmailInput(),
           showPasswordInput(),
-          showFullNameInput(),
+          showConfirmPassword(),
           Spacer(),
           new GestureDetector(
             onTap: () {
@@ -73,8 +82,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
+                /*
                 onPressed: () {
                   Navigator.push(context, SplashAnimation(widget: LoginPage()));
+                },
+                */
+                onPressed: () {
+                  //condition if not valide
+                  if (!_formKey.currentState.validate()) {
+                    return;
+                  }
+                  //else validate inputs affectation by calling onSave of the textinput
+                  _formKey.currentState.save();
+                  print(_email);
+                  print(_password);
                 },
               ),
             ),
@@ -126,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget showFullNameInput() {
+  Widget showConfirmPassword() {
     return Container(
       width: MediaQuery.of(context).size.width / 1.2,
       height: 45,
@@ -139,6 +160,15 @@ class _RegisterPageState extends State<RegisterPage> {
         keyboardType: TextInputType.text,
         autofocus: false,
         maxLines: 1,
+        obscureText: true,
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Confirme Password is required';
+          }
+        },
+        onSaved: (String value) {
+          _confPassword = value;
+        },
         decoration: InputDecoration(
           border: InputBorder.none,
           icon: Icon(
@@ -147,8 +177,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           hintText: 'Confirme Password',
         ),
-        validator: (value) =>
-            value.isEmpty ? 'Password confirmation can\'t be empty' : null,
         //onSaved: (value) => _email = value.trim(),
       ),
     );
@@ -176,7 +204,14 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           hintText: 'Email',
         ),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Email is required';
+          }
+        },
+        onSaved: (String value) {
+          _email = value;
+        },
         //onSaved: (value) => _email = value.trim(),
       ),
     );
@@ -204,7 +239,14 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           hintText: 'Password',
         ),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Password is required';
+          }
+        },
+        onSaved: (String value) {
+          _password = value;
+        },
         //onSaved: (value) => _password = value.trim(),
       ),
     );
