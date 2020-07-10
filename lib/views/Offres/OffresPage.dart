@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:studen_co_loco/views/Offres/OffreDetails.dart';
+import 'package:studen_co_loco/views/tests/OffreDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
 
@@ -10,6 +11,25 @@ class OffrePage extends StatefulWidget {
 
 class _OffrePageState extends State<OffrePage> {
   var clients = [];
+  List<Widget> list = new List<Widget>();
+
+  void initState() {
+    super.initState();
+    populateMarkers();
+  }
+
+  populateMarkers() {
+    clients = [];
+    Firestore.instance.collection('Offers').getDocuments().then((value) {
+      if (value.documents.isNotEmpty) {
+        for (int i = 0; i < value.documents.length; i++) {
+          clients.add(value.documents[i].data);
+          //initMarker(value.documents[i].data);
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +42,19 @@ class _OffrePageState extends State<OffrePage> {
               child: ListView(
                 padding: EdgeInsets.only(top: 8),
                 children: [
-                  buildPostSection(
-                      'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640',
-                      "assets/images/main_logo.png"),
-                  buildPostSection(
+                    buildPostSection(
                       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
                       "assets/images/profile.png"),
-                  buildPostSection(
+                      buildPostSection(
                       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
                       "assets/images/profile.png"),
+                      buildPostSection(
+                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
+                      "assets/images/profile.png"),
+                      
+                  //buildPostSection(clients)
+
+                  //Row(children: list)
                 ],
               ),
             )
@@ -41,54 +65,62 @@ class _OffrePageState extends State<OffrePage> {
   }
 
   Container buildPostSection(String urlPost, String urlProfilePhoto) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 8),
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildPostFirstRow(urlProfilePhoto),
-          SizedBox(
-            height: 10,
-          ),
-          buildPostPicture(urlPost),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            "Superficier     :  15 m2",
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800]),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            "Max Etudiant :  4",
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800]),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            "Bundled with :  Wifi, Laver linge, free electricite",
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800]),
-          ),
-        ],
-      ),
-    );
+  //Container buildPostSection(variables) {
+    //String urlPost = variable[0]['photo'];
+    String urlProfilePhoto = "assets/images/profile.png";
+    
+      return Container(
+        
+        margin: EdgeInsets.only(bottom: 8),
+        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildPostFirstRow(urlProfilePhoto),
+            SizedBox(
+              height: 10,
+            ),
+            //buildPostPicture(urlPost),
+            buildPostPicture(urlPost),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Superficier     :  15 m2",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800]),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(
+              "Max Etudiant :  4",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800]),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(
+              "Bundled with :  Wifi, Laver linge, free electricite",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800]),
+            ),
+          ],
+        ),
+      );
+    
   }
 
   Row buildPostFirstRow(String urlProfilePhoto) {
@@ -144,9 +176,9 @@ class _OffrePageState extends State<OffrePage> {
                           return Dialog(
                               child: DetailsShow(),
                               shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                          ));
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                              ));
                         });
                     //print('Typed a title offer');
                   },

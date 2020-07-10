@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoder/geocoder.dart';
 import "package:latlong/latlong.dart" as LatLng;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:studen_co_loco/models/Offers.dart';
 import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
 
 class OffersMapPage extends StatefulWidget {
@@ -13,6 +14,7 @@ class OffersMapPage extends StatefulWidget {
 class _OffersMapPageState extends State<OffersMapPage> {
   List<Marker> allMarkers = [];
   var clients = [];
+  Offer allOffers;
 
   void initState() {
     super.initState();

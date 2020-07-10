@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studen_co_loco/helpers/splash_animation.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
 import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
@@ -104,8 +105,13 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.notifications_active),
-              onPressed: () {},
+              icon: Icon(Icons.security),
+              onPressed: () {
+                widget.auth.signOut();
+                Navigator.push(
+                  context, SplashAnimation(widget: LoginPage())
+                );
+              },
             )
           ],
         ),
