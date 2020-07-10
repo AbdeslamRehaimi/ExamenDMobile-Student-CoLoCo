@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoder/geocoder.dart';
 import "package:latlong/latlong.dart" as LatLng;
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class OffersMapPage extends StatefulWidget {
   @override
@@ -10,8 +12,19 @@ class OffersMapPage extends StatefulWidget {
 
 class _OffersMapPageState extends State<OffersMapPage> {
   List<Marker> allMarkers = [];
+  var clients = [];
+
+
+void initState() {
+    super.initState();
+    populateMarkers();
+  }
+
 
   setMarkers() {
+    for(int i=0; i<clients.length; i++){
+        addToList(clients[i]);
+    }
     /*
     allMarkers.add(
       new Marker(
@@ -29,28 +42,26 @@ class _OffersMapPageState extends State<OffersMapPage> {
                 ),
               )),
     );
-    allMarkers.add(
-      new Marker(
-          width: 45.0,
-          height: 45.0,
-          point: new LatLng.LatLng(40.72, -74.00),
-          builder: (context) => new Container(
-                child: IconButton(
-                  icon: Icon(Icons.location_on),
-                  color: Colors.green,
-                  iconSize: 45.0,
-                  onPressed: () {
-                    print('Marker Taped');
-                  },
-                ),
-              )),
-    );
     */
     return allMarkers;
   }
 
-  addToList() async {
-    final query = 'JFK, New York';
+  populateMarkers() {
+    clients = [];
+    Firestore.instance.collection('markers').getDocuments().then((value) {
+      if (value.documents.isNotEmpty) {
+        for (int i = 0; i < value.documents.length; i++) {
+          clients.add(value.documents[i].data);
+          //initMarker(value.documents[i].data);
+        }
+      }
+    });
+    
+  }
+
+  addToList(variable) async {
+    //final query = 'New York, canal street';
+    final query = variable['adress'];
     var adresses = await Geocoder.local.findAddressesFromQuery(query);
     var first = adresses.first;
 
@@ -61,7 +72,7 @@ class _OffersMapPageState extends State<OffersMapPage> {
           height: 45.0, 
           point: new LatLng.LatLng(first.coordinates.latitude, first.coordinates.longitude),
           builder: (context) => new Container(
-            child: IconButton(icon: Icon(Icons.location_on),  iconSize: 45.0 ,onPressed: (){print('object');}),
+            child: IconButton(icon: Icon(Icons.location_on),  iconSize: 45.0 ,onPressed: (){print(variable['adress']);}),
           )
         )
       );
@@ -71,9 +82,9 @@ class _OffersMapPageState extends State<OffersMapPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text('Leaflet Maps'),
+      /*appBar: new AppBar(title: new Text('Leaflet Maps'),
       leading: new IconButton(icon: Icon(Icons.ac_unit), onPressed: () {addToList();}),
-      ),
+      ),*/
       
       body: new FlutterMap(
           options: new MapOptions(

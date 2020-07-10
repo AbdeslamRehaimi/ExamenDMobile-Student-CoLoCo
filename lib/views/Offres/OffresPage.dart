@@ -8,6 +8,7 @@ class OffrePage extends StatefulWidget {
 }
 
 class _OffrePageState extends State<OffrePage> {
+  var clients = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +21,15 @@ class _OffrePageState extends State<OffrePage> {
               child: ListView(
                 padding: EdgeInsets.only(top: 8),
                 children: [
-                  buildPostSection('assets/images/main_logo.png',
+                  buildPostSection(
+                      'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640',
                       "assets/images/main_logo.png"),
                   buildPostSection(
-                      "assets/images/02.png", "assets/images/profile.png"),
+                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
+                      "assets/images/profile.png"),
                   buildPostSection(
-                      "assets/images/03.png", "assets/images/profile.png"),
-                  
+                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
+                      "assets/images/profile.png"),
                 ],
               ),
             )
@@ -55,6 +58,7 @@ class _OffrePageState extends State<OffrePage> {
           SizedBox(
             height: 5,
           ),
+          /*
           Text(
             "963 likes",
             style: TextStyle(
@@ -62,6 +66,7 @@ class _OffrePageState extends State<OffrePage> {
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800]),
           ),
+          */
           SizedBox(
             height: 8,
           ),
@@ -79,7 +84,9 @@ class _OffrePageState extends State<OffrePage> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => OffreDetailsPage( url: urlProfilePhoto)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        OffreDetailsPage(url: urlProfilePhoto)));
               },
               child: Hero(
                 tag: urlProfilePhoto,
@@ -143,6 +150,7 @@ class _OffrePageState extends State<OffrePage> {
                 image: NetworkImage(urlPost),
               )),
         ),
+        //THIS IS WHERE TO PUPULATE PRICE AND INFOS OF OFFER
         Positioned(
           bottom: 20,
           right: 20,

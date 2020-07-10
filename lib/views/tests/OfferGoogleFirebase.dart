@@ -1,14 +1,14 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class GoogleMapApp extends StatefulWidget {
+class FireBaseMap extends StatefulWidget {
   @override
-  _GoogleMapAppState createState() => _GoogleMapAppState();
+  _FireBaseMapState createState() => _FireBaseMapState();
 }
 
-class _GoogleMapAppState extends State<GoogleMapApp> {
+class _FireBaseMapState extends State<FireBaseMap> {
   var currentClient;
   var currentBearing;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
@@ -26,32 +26,29 @@ class _GoogleMapAppState extends State<GoogleMapApp> {
       currentLocation = value;
       mapToggle = true;
       populateMarkers();
+      print('_________begin___________');
     });
   }
 
   populateMarkers() {
     clients = [];
-    Firestore.instance.collection('markers').getDocuments().then((value) {
-      if (value.documents.isNotEmpty) {
-        for (int i = 0; i < value.documents.length; i++) {
-          clients.add(value.documents[i].data);
-          initMarker(value.documents[i].data);
+    final dbref = FirebaseDatabase.instance.reference().child('example');
+    FutureBuilder(
+      future: dbref.once(),
+      builder: (context, AsyncSnapshot<DataSnapshot> snapshot){
+        if(snapshot.hasData){
+          clients.clear();
+          Map<dynamic, dynamic> values = snapshot.data.value;
+          values.forEach((key, values) {
+            clients.add(values);
+            print(values);
+          });
         }
-      }
-    });
+      },
+    );
+ 
   }
 
-/*
-  initMarker(client){
-    mapController.clearMarkers().then((val) {
-      mapController.addMarker(MarkerOptions(
-      position:
-      LatLng(client['location'].latitude, client['location'].longitude),
-      draggable: false,
-      infoWindowText: InfoWindowText(client['clientName'], 'Nice')));
-    });
-  }
- */
   initMarker(client) {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
@@ -60,11 +57,11 @@ class _GoogleMapAppState extends State<GoogleMapApp> {
     final Marker marker = Marker(
       markerId: markerId,
       position:
-          LatLng(client['clientName'].latitude, client['location'].longitude),
+          LatLng(client['geoloc']['latitude'].latitude, client['geoloc']['longitude'].longitude),
       infoWindow: InfoWindow(
-          title: client['clientName'],
+          title: client['name'],
           snippet: 'There are currently ' +
-              client['clientName'].toString() +
+              client['name'].toString() +
               ' users here.'),
       onTap: () {
         _onMarkerTapped(markerId);
@@ -99,18 +96,17 @@ class _GoogleMapAppState extends State<GoogleMapApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('map'),
-      ),
+    return new Scaffold(
       body: Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
-                  height: MediaQuery.of(context).size.height - 80.0,
+                  //height: MediaQuery.of(context).size.height - 80.0,
+                  height: double.infinity,
                   width: double.infinity,
                   child: mapToggle
+
                       ? GoogleMap(
                           onMapCreated: onMapCreated,
                           initialCameraPosition: CameraPosition(
@@ -124,7 +120,7 @@ class _GoogleMapAppState extends State<GoogleMapApp> {
                       : Center(
                           child: Text(
                             'Loading ... Plaise wait..',
-                            style: TextStyle(fontSize: 20.0),
+                            //style: TextStyle(fontSize: 20.0),
                           ),
                         ))
             ],

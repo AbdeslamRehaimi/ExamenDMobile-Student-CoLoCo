@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
+import 'package:studen_co_loco/views/tests/OfferGoogleFirebase.dart';
+import 'package:studen_co_loco/views/tests/OffersGoogleMap.dart';
 import 'package:studen_co_loco/views/Offres/OffresPage.dart';
 import 'package:studen_co_loco/widgets/custom_button.dart';
 import 'package:studen_co_loco/views/auth/LoginApp.dart';
