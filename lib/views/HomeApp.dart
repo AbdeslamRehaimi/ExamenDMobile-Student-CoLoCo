@@ -4,7 +4,7 @@ import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
 import 'package:studen_co_loco/views/Offres/OffresPage.dart';
 import 'package:studen_co_loco/widgets/custom_button.dart';
 import 'package:studen_co_loco/views/auth/LoginApp.dart';
-import 'package:studen_co_loco/views/auth/RegisterApp.dart';
+import 'package:studen_co_loco/views/Offres/OffersMap.dart';
 
 class HomePage extends StatefulWidget {
   final BaseAuth auth;
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
         Expanded(
             child: PageView(
           controller: _pageController,
-          children: <Widget>[OffrePage(), RegisterPage()],
+          children: <Widget>[OffrePage(), OffersMapPage()],
           //Declare All my views to show
           //children: <Widget>[TaskPage(), EventPage(), MemoPage()],
         ))
