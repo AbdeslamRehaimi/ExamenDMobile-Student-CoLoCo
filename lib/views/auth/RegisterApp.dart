@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/helpers/splash_animation.dart';
+import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/auth/LoginApp.dart';
 import 'package:studen_co_loco/views/auth/PasswordApp.dart';
 
 class RegisterPage extends StatefulWidget {
+  //final BaseAuth auth;
+  //final VoidCallback loginCallback;
+  //RegisterPage({this.auth, this.loginCallback});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -13,9 +18,20 @@ class _RegisterPageState extends State<RegisterPage> {
   String _email;
   String _password;
   String _confPassword;
+  BaseAuth auth ;
+  String userId = "";
 
   bool _isLoading;
   String _errorMessage;
+  bool _isLoginForm;
+
+  @override
+  void initState() {
+    _errorMessage = "";
+    _isLoading = false;
+    _isLoginForm = true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +110,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   }
                   //else validate inputs affectation by calling onSave of the textinput
                   _formKey.currentState.save();
-                  print(_email);
-                  print(_password);
-                },
+                  validateAndSubmit();
+                  
+                }
+               
               ),
             ),
           ),
@@ -251,4 +268,53 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
+
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  void validateAndSubmit() async {
+    userId = await auth.signIn(_email, _password);
+  }
+/*
+  void validateAndSubmit() async {
+    setState(() {
+      _errorMessage = "";
+      _isLoading = true;
+    });
+    if (validateAndSave()) {
+      String userId = "";
+      try {
+        if (_isLoginForm) {
+          userId = await widget.auth.signIn(_email, _password);
+          print('Signed in: $userId');
+        } else {
+          userId = await widget.auth.signUp(_email, _password);
+          //widget.auth.sendEmailVerification();
+          //_showVerifyEmailSentDialog();
+          print('Signed up user: $userId');
+        }
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (userId.length > 0 && userId != null && _isLoginForm) {
+          widget.loginCallback();
+        }
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          _isLoading = false;
+          _errorMessage = e.message;
+          _formKey.currentState.reset();
+        });
+      }
+    }
+  }
+  */
 }
