@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studen_co_loco/widgets/custom_modal_action_button.dart';
 
-class DetailsShow extends StatefulWidget {
-  @override
-  _DetailsShowState createState() => _DetailsShowState();
-}
+class DetailsShow extends StatelessWidget {
+  final  variable;
+  DetailsShow({Key key, @required this.variable}) : super(key: key);
 
-class _DetailsShowState extends State<DetailsShow> {
+  DetailsShow dt ;
   var clients = [];
 
   @override
@@ -21,9 +20,7 @@ class _DetailsShowState extends State<DetailsShow> {
           //padding: EdgeInsets.only(top: 8),
           children: <Widget>[
             
-            buildPostSection(
-                'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640',
-                "assets/images/main_logo.png"),
+            buildPostSection(variable),
             
           ],
         ),
@@ -31,7 +28,7 @@ class _DetailsShowState extends State<DetailsShow> {
     );
   }
 
-  Container buildPostSection(String urlPost, String urlProfilePhoto) {
+  Container buildPostSection(variable) {
     return Container(
       margin: EdgeInsets.only(bottom: 8),
       padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -42,16 +39,16 @@ class _DetailsShowState extends State<DetailsShow> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildPostFirstRow(urlProfilePhoto),
+          buildPostFirstRow(variable),
           SizedBox(
             height: 10,
           ),
-          buildPostPicture(urlPost),
+          buildPostPicture(variable),
           SizedBox(
             height: 5,
           ),
           Text(
-            "Superficier     :  15 m2",
+            "Superficier     :  ${variable['superficie']}",
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -61,7 +58,7 @@ class _DetailsShowState extends State<DetailsShow> {
             height: 8,
           ),
           Text(
-            "Max Etudiant :  4",
+            "Max Etudiant :  ${variable['capacite']}",
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -71,7 +68,7 @@ class _DetailsShowState extends State<DetailsShow> {
             height: 8,
           ),
           Text(
-            "Bundled with :  Wifi, Laver linge, free electricite",
+            "Bundled with :  ${variable['description']}",
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -88,10 +85,10 @@ class _DetailsShowState extends State<DetailsShow> {
               ),
           CustomModalActionButton(
             onClose: () {
-              Navigator.of(context).pop();
+             // Navigator.of(context).pop();
             },
             onSave: () {
-              Navigator.of(context).pop();
+              //Navigator.of(context).pop();
             },
           )
         ],
@@ -100,7 +97,8 @@ class _DetailsShowState extends State<DetailsShow> {
     );
   }
 
-  Row buildPostFirstRow(String urlProfilePhoto) {
+  Row buildPostFirstRow(variable) {
+    String urlProfilePhoto = "assets/images/main_logo.png";
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -125,7 +123,7 @@ class _DetailsShowState extends State<DetailsShow> {
               children: [
                 
                 Text(
-                  "Co-Loc : House with two rooms",
+                  "${variable['titre']}",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -133,7 +131,7 @@ class _DetailsShowState extends State<DetailsShow> {
                 ),
                
                 Text(
-                  "0625896525",
+                  "${variable['tel']}",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -152,11 +150,11 @@ class _DetailsShowState extends State<DetailsShow> {
     );
   }
 
-  Stack buildPostPicture(String urlPost) {
+  Stack buildPostPicture(variable) {
     return Stack(
       children: [
         Container(
-          height: MediaQuery.of(context).size.width - 150,
+          //height: MediaQuery.of(context).size.width - 150,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
@@ -171,12 +169,12 @@ class _DetailsShowState extends State<DetailsShow> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 
-                image: NetworkImage(urlPost)
+                image: NetworkImage(variable['photo'].toString()),
               )
             ),
         ),
         //THIS IS WHERE TO PUPULATE PRICE AND INFOS OF OFFER
-        _displayContent(clients),
+        _displayContent(variable),
       ],
     );
   }
@@ -210,7 +208,7 @@ class _DetailsShowState extends State<DetailsShow> {
                 thickness: 2,
               ),
               Text(
-                '500 DH/mois',
+                '${variable['prix']} DH/mois',
                 style: TextStyle(
                     //fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,

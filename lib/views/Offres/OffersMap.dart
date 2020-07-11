@@ -81,7 +81,7 @@ class _OffersMapPageState extends State<OffersMapPage> {
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
-                                child: DetailsShow(),
+                                child: DetailsShow(variable: variable),
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12))));

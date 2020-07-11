@@ -50,26 +50,7 @@ class _OffrePageState extends State<OffrePage> {
                 },
               ),
 
-              /*
-              child: ListView(
-                padding: EdgeInsets.only(top: 8),
-                children: [ 
-                  buildPostSection(
-                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
-                      "assets/images/profile.png"),
-                  
-                  buildPostSection(
-                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
-                      "assets/images/profile.png"),
-                  buildPostSection(
-                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
-                      "assets/images/profile.png"),
-                  buildPostSection(
-                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
-                      "assets/images/profile.png"),
-                ],
-              ),
-              */
+              
             )
           ],
         ),
@@ -149,7 +130,7 @@ class _OffrePageState extends State<OffrePage> {
                     context: context,
                     builder: (BuildContext context) {
                       return Dialog(
-                          child: DetailsShow(),
+                          child: DetailsShow(variable: variable),
                           shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))));
@@ -185,7 +166,7 @@ class _OffrePageState extends State<OffrePage> {
                         context: context,
                         builder: (BuildContext context) {
                           return Dialog(
-                              child: DetailsShow(),
+                              child: DetailsShow(variable: variable),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12)),
@@ -231,7 +212,7 @@ class _OffrePageState extends State<OffrePage> {
               ],
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(variables['photo']),
+                image: NetworkImage(variables['photo'].toString()),
               )),
         ),
         //THIS IS WHERE TO PUPULATE PRICE AND INFOS OF OFFER

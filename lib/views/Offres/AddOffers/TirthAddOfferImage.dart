@@ -56,7 +56,7 @@ class OfferImagePage extends StatelessWidget {
               ).then((value) {
                 print(value.documentID);
                 Firestore.instance
-                    .collection("offers")
+                    .collection("Offers")
                     .document(value.documentID);
               });
               /*
