@@ -3,7 +3,7 @@ import 'package:studen_co_loco/helpers/splash_animation.dart';
 import 'package:studen_co_loco/models/Offers.dart';
 import 'package:studen_co_loco/services/Authentication.dart';
 import 'package:studen_co_loco/views/Offres/AddOffers/FirstAddOffersLoc.dart';
-import 'package:studen_co_loco/views/Offres/OfferAdd.dart';
+import 'file:///C:/Users/TOSHIBA/flutter%20apps/__Exam__/studen_co_loco/test/OfferAdd.dart';
 import 'package:studen_co_loco/views/Offres/detailsPopup.dart';
 import 'package:studen_co_loco/views/tests/OfferGoogleFirebase.dart';
 import 'package:studen_co_loco/views/tests/OffersGoogleMap.dart';

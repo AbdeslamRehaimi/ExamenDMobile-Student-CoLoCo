@@ -39,24 +39,37 @@ class _OffrePageState extends State<OffrePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
+              child: ListView.builder(
+                itemCount: clients.length,
+                itemBuilder: (BuildContext context, int index) {
+                  print(index);
+                  return (
+                    
+                      buildPostSection(clients[index])
+                  );
+                },
+              ),
+
+              /*
               child: ListView(
                 padding: EdgeInsets.only(top: 8),
-                children: [
-                    buildPostSection(
+                children: [ 
+                  buildPostSection(
                       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
                       "assets/images/profile.png"),
-                      buildPostSection(
+                  
+                  buildPostSection(
                       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
                       "assets/images/profile.png"),
-                      buildPostSection(
+                  buildPostSection(
                       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
                       "assets/images/profile.png"),
-                      
-                  //buildPostSection(clients)
-
-                  //Row(children: list)
+                  buildPostSection(
+                      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=640",
+                      "assets/images/profile.png"),
                 ],
               ),
+              */
             )
           ],
         ),
@@ -64,66 +77,64 @@ class _OffrePageState extends State<OffrePage> {
     );
   }
 
-  Container buildPostSection(String urlPost, String urlProfilePhoto) {
-  //Container buildPostSection(variables) {
+  //Container buildPostSection(String urlPost, String urlProfilePhoto, int k) {
+    Container buildPostSection(variables) {
     //String urlPost = variable[0]['photo'];
     String urlProfilePhoto = "assets/images/profile.png";
-    
-      return Container(
-        
-        margin: EdgeInsets.only(bottom: 8),
-        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-        decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildPostFirstRow(urlProfilePhoto),
-            SizedBox(
-              height: 10,
-            ),
-            //buildPostPicture(urlPost),
-            buildPostPicture(urlPost),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              "Superficier     :  15 m2",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[800]),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              "Max Etudiant :  4",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[800]),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              "Bundled with :  Wifi, Laver linge, free electricite",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[800]),
-            ),
-          ],
-        ),
-      );
-    
+
+    return Container(
+      margin: EdgeInsets.only(bottom: 8),
+      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildPostFirstRow(variables),
+          SizedBox(
+            height: 10,
+          ),
+          //buildPostPicture(urlPost),
+          buildPostPicture(variables),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "Superficier     :  ${variables['superficie']}",
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[800]),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            "Max Etudiant :  ${variables['capacite']}",
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[800]),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            "Description    :  ${variables['description']}",
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[800]),
+          ),
+        ],
+      ),
+    );
   }
 
-  Row buildPostFirstRow(String urlProfilePhoto) {
+  Row buildPostFirstRow(variable) {
+    String urlProfilePhoto = "assets/images/profile.png";
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -162,7 +173,7 @@ class _OffrePageState extends State<OffrePage> {
               children: [
                 GestureDetector(
                   child: Text(
-                    "Co-Loc : House with two rooms",
+                    "${variable['titre']}",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -184,7 +195,7 @@ class _OffrePageState extends State<OffrePage> {
                   },
                 ),
                 Text(
-                  "0625896525",
+                  "${variable['tel']}",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -203,7 +214,7 @@ class _OffrePageState extends State<OffrePage> {
     );
   }
 
-  Stack buildPostPicture(String urlPost) {
+  Stack buildPostPicture(variables) {
     return Stack(
       children: [
         Container(
@@ -220,11 +231,11 @@ class _OffrePageState extends State<OffrePage> {
               ],
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(urlPost),
+                image: NetworkImage(variables['photo']),
               )),
         ),
         //THIS IS WHERE TO PUPULATE PRICE AND INFOS OF OFFER
-        _displayContent(clients),
+        _displayContent(variables),
       ],
     );
   }
@@ -258,7 +269,7 @@ class _OffrePageState extends State<OffrePage> {
                 thickness: 2,
               ),
               Text(
-                '500 DH/mois',
+                '${data['prix']} DH/mois',
                 style: TextStyle(
                     //fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,
